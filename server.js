@@ -6,6 +6,8 @@ app.use(express.static(path.join(__dirname, 'app')));
 
 var io = require('socket.io').listen(server);
 
+var Player = require('./Player.js');
+
 var jsonfile = require('jsonfile');
 var accFile = './accounts.json';
 var acc = [];
@@ -45,7 +47,7 @@ io.sockets.on('connection', function(socket) {
       }
     }
     if(!returned) {
-      acc.push({'username':username,'password':password});
+      acc.push(new Player(username, password, 0.00));
       updateAccFile();
       socket.emit('signupSuccess');
     }
