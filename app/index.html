@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="login">
+        <label for="username">Username: </label><input id="loginU" type="text" name="username"><span id="wrongUser" style="display:none"> There is no account with that username.</span><br>
+        <label for="password">Password: </label><input id="loginP" type="password" name="password"><span id="wrongPass" style="display:none"> Password is incorrect.</span><br>
+        <button onclick="sendLogin()">Login</button><br>
+        <a href="#" onclick="hide(loginE); show(signupE)">Don't already have an account? Sign up now!</a>
+      </div>
+      <div id="signup" style="display:none">
+        <label for="username">Username: </label><input id="signupU" type="text" name="username"><span id="nameTaken" style="display:none"> That username is already taken.</span><br>
+        <label for="password">Password: </label><input id="signupP" type="password" name="password"><br>
+        <label for="confirm">Confirm Password: </label><input id="signupC" type="password" name="confirm"><span id="passMatch" style="display:none"> Passwords do not match.</span><br>
+        <button onclick="signup()">Sign Up</button><br>
+        <a href="#" onclick="hide(signupE); show(loginE)">Already have an account? Log in now!</a>
+      </div>
+      <div id="game" style="display:none">
+
+      </div>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
