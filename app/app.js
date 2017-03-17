@@ -2,6 +2,7 @@ var socket = io.connect();
 
 var username = "";
 var password = "";
+var confirm = "";
 
 var loginE = document.getElementById('login');
 var signupE = document.getElementById('signup');
@@ -14,9 +15,9 @@ function show(element) {
   element.style.display = 'inherit';
 }
 
-function sendLogin() {
-  username = document.getElementById('loginU').innerHTML;
-  password = document.getElementById('loginP').innerHTML;
+function login() {
+  username = document.getElementById('loginU').value;
+  password = document.getElementById('loginP').value;
   socket.emit('login', username, password);
 }
 
@@ -27,5 +28,44 @@ socket.on('loginSuccess', function() {
 });
 
 socket.on('wrongPassword', function() {
+  document.getElementById('wrongUser').style.display = 'none';
   document.getElementById('wrongPass').style.display = 'inline';
+});
+
+socket.on('userUnknown', function() {
+  document.getElementById('wrongUser').style.display = 'inline';
+  document.getElementById('wrongPass').style.display = 'none';
+});
+
+function signup() {
+  hide(document.getElementById('nameTaken'));
+  username = document.getElementById('signupU').value;
+  password = document.getElementById('signupP').value;
+  confirm = document.getElementById('signupC').value;
+  if(username.length >= 6 && password == confirm && password.length >= 6) {
+    hide(document.getElementById('emptyName'));
+    hide(document.getElementById('emptyPass'));
+    hide(document.getElementById('passMatch'));
+    socket.emit('signup', username, password);
+  } else {
+    if(username.length < 6) {
+      document.getElementById('emptyName').style.display = 'inline';
+    }
+    if(password.length < 6) {
+      document.getElementById('emptyPass').style.display = 'inline';
+    }
+    if(password != confirm) {
+      document.getElementById('passMatch').style.display = 'inline';
+    }
+  }
+}
+
+socket.on('nameTaken', function() {
+  document.getElementById('nameTaken').style.display = 'inline';
+});
+
+socket.on('signupSuccess', function() {
+  hide(loginE);
+  hide(signupE);
+  show(gameE);
 });

@@ -24,9 +24,30 @@ server.listen(3000, function(){
 
 io.sockets.on('connection', function(socket) {
   socket.on('login', function(username, password) {
+    var returned = false;
     for(a of acc) {
-      if(a.username == username && a.password == password) socket.emit('loginSuccess');
-      else if(a.username == username) socket.emit('wrongPassword');
+      if(a.username == username && a.password == password) {
+        socket.emit('loginSuccess');
+        returned = true;
+      } else if(a.username == username) {
+        socket.emit('wrongPassword');
+        returned = true;
+      }
+    }
+    if(!returned) socket.emit('userUnknown');
+  });
+  socket.on('signup', function(username, password) {
+    var returned = false;
+    for(a of acc) {
+      if(a.username == username) {
+        socket.emit('nameTaken');
+        returned = true;
+      }
+    }
+    if(!returned) {
+      acc.push({'username':username,'password':password});
+      updateAccFile();
+      socket.emit('signupSuccess');
     }
   });
 });
