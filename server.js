@@ -29,7 +29,11 @@ io.sockets.on('connection', function(socket) {
     var returned = false;
     for(a of acc) {
       if(a.username == username && a.password == password) {
-        socket.emit('loginSuccess');
+        var data = {};
+        jsonfile.readFile(a.file, function(err, obj) {
+          data = obj;
+        });
+        socket.emit('loginSuccess', a.id, data);
         returned = true;
       } else if(a.username == username) {
         socket.emit('wrongPassword');
@@ -47,10 +51,15 @@ io.sockets.on('connection', function(socket) {
       }
     }
     if(!returned) {
-      acc.push(new Player(username, password, 0.00));
+      acc.push(new Player(username, password, acc.length));
+      var data = {};
+      jsonfile.writeFile(acc[acc.length-1].file, data, function (err) {});
       updateAccFile();
-      socket.emit('signupSuccess');
+      socket.emit('loginSuccess', acc[acc.length-1].id, data);
     }
+  });
+  socket.on('save', function(id, save) {
+    jsonfile.writeFile(acc[id].file, data, function (err) {});
   });
 });
 

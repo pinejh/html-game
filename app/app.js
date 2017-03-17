@@ -4,6 +4,9 @@ var username = "";
 var password = "";
 var confirm = "";
 
+var id = 0;
+var data = {};
+
 var loginE = document.getElementById('login');
 var signupE = document.getElementById('signup');
 var gameE = document.getElementById('game');
@@ -21,7 +24,9 @@ function login() {
   socket.emit('login', username, password);
 }
 
-socket.on('loginSuccess', function() {
+socket.on('loginSuccess', function(id, data) {
+  this.id = id;
+  this.data = data;
   hide(loginE);
   hide(signupE);
   show(gameE);
@@ -64,8 +69,6 @@ socket.on('nameTaken', function() {
   document.getElementById('nameTaken').style.display = 'inline';
 });
 
-socket.on('signupSuccess', function() {
-  hide(loginE);
-  hide(signupE);
-  show(gameE);
-});
+function save() {
+  socket.emit('save', id, data);
+}

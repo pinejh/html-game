@@ -1,9 +1,11 @@
 "use strict";
 class Player {
-  constructor(username, password, balance) {
+  constructor(username, password, id) {
     this.username = username;
     this.password = password;
-    this.balance = balance;
+    this.id = id;
+    this.balance = 0.00;
+    this.file = './saves/'+username+'.json';
   }
   getBal() {
     return this.money.toFixed(2);;
