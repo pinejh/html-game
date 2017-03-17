@@ -33,8 +33,11 @@ io.sockets.on('connection', function(socket) {
         jsonfile.readFile(a.file, function(err, obj) {
           data = obj;
         });
-        socket.emit('loginSuccess', a.id, data);
         returned = true;
+        setTimeout(function() {
+          socket.emit('loginSuccess', a.id, data);
+          console.log('User "'+username+'" logged in');
+        }, 500);
       } else if(a.username == username) {
         socket.emit('wrongPassword');
         returned = true;
@@ -52,14 +55,17 @@ io.sockets.on('connection', function(socket) {
     }
     if(!returned) {
       acc.push(new Player(username, password, acc.length));
-      var data = {};
+      var data = {balance:0.00};
       jsonfile.writeFile(acc[acc.length-1].file, data, function (err) {});
       updateAccFile();
       socket.emit('loginSuccess', acc[acc.length-1].id, data);
+      console.log('Created new account "'+username+'"');
     }
   });
   socket.on('save', function(id, save) {
+    console.log('Saving data for user "'+acc[id].username+'"');
     jsonfile.writeFile(acc[id].file, data, function (err) {});
+    console.log('Data saved for user "'+acc[id].username+'"');
   });
 });
 

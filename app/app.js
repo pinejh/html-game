@@ -24,12 +24,13 @@ function login() {
   socket.emit('login', username, password);
 }
 
-socket.on('loginSuccess', function(id, data) {
-  this.id = id;
-  this.data = data;
+socket.on('loginSuccess', function(ID, d) {
+  id = ID;
+  data = d;
   hide(loginE);
   hide(signupE);
   show(gameE);
+  console.log(getBal());
 });
 
 socket.on('wrongPassword', function() {
