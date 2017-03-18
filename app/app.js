@@ -21,6 +21,8 @@ function show(element) {
 function login() {
   username = document.getElementById('loginU').value;
   password = document.getElementById('loginP').value;
+  hide(document.getElementById('loginI'));
+  document.getElementById('loginS').style.display = 'inline';
   socket.emit('login', username, password);
 }
 
@@ -36,11 +38,15 @@ socket.on('loginSuccess', function(ID, d) {
 socket.on('wrongPassword', function() {
   document.getElementById('wrongUser').style.display = 'none';
   document.getElementById('wrongPass').style.display = 'inline';
+  hide(document.getElementById('loginS'));
+  document.getElementById('loginI').style.display = 'inline';
 });
 
 socket.on('userUnknown', function() {
   document.getElementById('wrongUser').style.display = 'inline';
   document.getElementById('wrongPass').style.display = 'none';
+  hide(document.getElementById('loginS'));
+  document.getElementById('loginI').style.display = 'inline';
 });
 
 function signup() {
