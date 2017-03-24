@@ -32,7 +32,8 @@ socket.on('loginSuccess', function(ID, d) {
   hide(loginE);
   hide(signupE);
   show(gameE);
-  console.log(getBal());
+  init();
+  // console.log(getBal());
 });
 
 socket.on('wrongPassword', function() {
