@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif; }
+
+body {
+  background-color: #97ACBF;
+  color: white; }
+  body div {
+    background-color: #323940; }
+
+.button {
+  position: relative;
+  border: 3px solid #226fbe;
+  background-color: #226fbe;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  outline: none;
+  box-shadow: 0 4px #115ead; }
+  .button:active {
+    top: 2px;
+    box-shadow: 0 2px #115ead; }
+  .button:hover {
+    background-color: #fff;
+    color: #226fbe; }
+
+input[type="text"], input[type="password"] {
+  appearance: none;
+  box-shadow: none;
+  border-radius: none; }
+  input[type="text"]:focus, input[type="password"]:focus {
+    outline: none; }
+
+.input {
+  font-size: .8em;
+  padding: 2px;
+  border: 1px solid #aaa;
+  border-radius: 5px; }
+
+.alert {
+  color: red;
+  letter-spacing: -1px;
+  background-color: #fff;
+  padding: 2px;
+  border: 1px solid red;
+  margin-top: -.5em;
+  margin-bottom: .5em; }
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+.spinner {
+  animation: spin .5s linear infinite; }
+
+/* Login Page */
+.login > *:not(:last-child) {
+  margin-bottom: 1em; }
+.login .login__label {
+  text-align: center; }
+.login .login__link {
+  text-align: center; }
+
+/* Signup Page */
+.signup > *:not(:last-child) {
+  margin-bottom: 1em; }
+.signup .signup__label {
+  text-align: center; }
+.signup .signup__link {
+  text-align: center; }
+
+/* Game Page */
+.game {
+  padding: 15px; }
+  .game .board {
+    position: relative;
+    background-color: rgba(125, 200, 255, 0.7);
+    height: 460px;
+    border-radius: 10px;
+    overflow: hidden; }
+    .game .board .messages {
+      position: absolute;
+      list-style: none;
+      text-indent: none;
+      bottom: 10px;
+      width: 100%; }
+      .game .board .messages .message {
+        overflow: scroll; }
+
+.ui {
+  list-style: none; }
+  .ui .ui__button {
+    transition-property: all;
+    transition-duration: 1s;
+    position: relative;
+    border: 3px solid #226fbe;
+    background-color: #226fbe;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    outline: none; }
+    .ui .ui__button:active {
+      top: 1px; }
+    .ui .ui__button:hover {
+      transition-property: all;
+      transition-duration: 1s;
+      /*background-color: #fff;
+      color: #226fbe;*/
+      border-radius: 3px; }
+  .ui .ui__button--money {
+    border: 3px solid #22be6f;
+    background-color: #22be6f; }
+  .ui .ui__button--money2 {
+    border: 3px solid #2ecc71;
+    background-color: #2ecc71; }
+
+.color__money {
+  color: #22be6f; }
+
+/*# sourceMappingURL=main.css.map */
